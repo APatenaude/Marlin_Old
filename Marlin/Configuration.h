@@ -758,7 +758,7 @@
  */
 #define X_PROBE_OFFSET_FROM_EXTRUDER -50  // X offset: -left  +right  [of the nozzle]
 #define Y_PROBE_OFFSET_FROM_EXTRUDER 0    // Y offset: -front +behind [the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER -1   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
 // Certain types of probes need to stay away from edges
 #define MIN_PROBE_EDGE 10
@@ -1007,7 +1007,7 @@
   //#define LEFT_PROBE_BED_POSITION MIN_PROBE_EDGE
   //#define RIGHT_PROBE_BED_POSITION (X_BED_SIZE - MIN_PROBE_EDGE)
   #define FRONT_PROBE_BED_POSITION (MIN_PROBE_EDGE+15)
-  #define BACK_PROBE_BED_POSITION ((Y_BED_SIZE - MIN_PROBE_EDGE)+15)
+  #define BACK_PROBE_BED_POSITION (Y_BED_SIZE - MIN_PROBE_EDGE - 1)
 
   // Probe along the Y axis, advancing X after each column
   //#define PROBE_Y_FIRST
@@ -1236,13 +1236,13 @@
 // @section temperature
 
 // Preheat Constants
-//#define PREHEAT_1_TEMP_HOTEND 180
-//#define PREHEAT_1_TEMP_BED     70
-//#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_1_TEMP_HOTEND 180
+#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
-//#define PREHEAT_2_TEMP_HOTEND 240
-//#define PREHEAT_2_TEMP_BED    110
-//#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
+#define PREHEAT_2_TEMP_HOTEND 240
+#define PREHEAT_2_TEMP_BED    110
+#define PREHEAT_2_FAN_SPEED     0 // Value from 0 to 255
 
 /**
  * Nozzle Park
