@@ -203,7 +203,7 @@
   #define PARKING_EXTRUDER_PARKING_X { -78, 184 }     // X positions for parking the extruders
   #define PARKING_EXTRUDER_GRAB_DISTANCE 1            // mm to move beyond the parking point to grab the extruder
   #define PARKING_EXTRUDER_SECURITY_RAISE 5           // Z-raise before parking
-  #define HOTEND_OFFSET_Z { 0.0, 1.3    }                // Z-offsets of the two hotends. The first must be 0.
+  #define HOTEND_OFFSET_Z { 0.0, 1.3    }             // Z-offsets of the two hotends. The first must be 0.
 #endif
 
 /**
@@ -350,12 +350,12 @@
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 285
+#define HEATER_0_MAXTEMP 275
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 150
+#define BED_MAXTEMP 125
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -380,7 +380,6 @@
   #define DEFAULT_Kp 28
   #define DEFAULT_Ki 0.60
   #define DEFAULT_Kd 700
-
 #endif // PIDTEMP
 
 //===========================================================================
@@ -587,7 +586,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 86.5 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 88 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -721,7 +720,7 @@
  */
 #define PROBING_HEATERS_OFF       // Turn heaters off when probing
 #if ENABLED(PROBING_HEATERS_OFF)
-  //#define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
+  #define WAIT_FOR_BED_HEATER     // Wait for bed to heat back up between probes (to improve accuracy)
 #endif
 #define PROBING_FANS_OFF          // Turn fans off when probing
 //#define DELAY_BEFORE_PROBING 200  // (ms) To prevent vibrations from triggering piezo sensors
@@ -756,12 +755,12 @@
  *      O-- FRONT --+
  *    (0,0)
  */
-#define X_PROBE_OFFSET_FROM_EXTRUDER -50  // X offset: -left  +right  [of the nozzle]
-#define Y_PROBE_OFFSET_FROM_EXTRUDER 0    // Y offset: -front +behind [the nozzle]
+#define X_PROBE_OFFSET_FROM_EXTRUDER -40  // X offset: -left  +right  [of the nozzle]
+#define Y_PROBE_OFFSET_FROM_EXTRUDER -8  // Y offset: -front +behind [the nozzle]
 #define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
 
 // Certain types of probes need to stay away from edges
-#define MIN_PROBE_EDGE 7.5
+#define MIN_PROBE_EDGE 20
 
 // X and Y axis travel speed (mm/m) between probes
 #define XY_PROBE_SPEED 5000
@@ -791,16 +790,16 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE    6 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE    5 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  6 // Z Clearance between probe points
 #define Z_CLEARANCE_MULTI_PROBE     5 // Z Clearance between multiple probes
 //#define Z_AFTER_PROBING             10 // Z position after probing is done
 
-#define Z_PROBE_LOW_POINT          -10 // Farthest distance below the trigger-point to go before stopping
+#define Z_PROBE_LOW_POINT          -1 // Farthest distance below the trigger-point to go before stopping
 
 // For M851 give a range for adjusting the Z probe offset
-#define Z_PROBE_OFFSET_RANGE_MIN -40
-#define Z_PROBE_OFFSET_RANGE_MAX 40
+#define Z_PROBE_OFFSET_RANGE_MIN -20
+#define Z_PROBE_OFFSET_RANGE_MAX 20
 
 // Enable the M48 repeatability test to test probe accuracy
 #define Z_MIN_PROBE_REPEATABILITY_TEST
@@ -865,10 +864,10 @@
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
 #define Y_MIN_POS 0
-#define Z_MIN_POS 0
+#define Z_MIN_POS -6
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 220
+#define Z_MAX_POS 200
 
 /**
  * Software Endstops
@@ -884,7 +883,7 @@
 #if ENABLED(MIN_SOFTWARE_ENDSTOPS)
   #define MIN_SOFTWARE_ENDSTOP_X
   #define MIN_SOFTWARE_ENDSTOP_Y
-  //#define MIN_SOFTWARE_ENDSTOP_Z
+  #define MIN_SOFTWARE_ENDSTOP_Z
 #endif
 
 // Max software endstops constrain movement within maximum coordinate bounds
@@ -970,7 +969,7 @@
  * Turn on with the command 'M111 S32'.
  * NOTE: Requires a lot of PROGMEM!
  */
-#define DEBUG_LEVELING_FEATURE
+//#define DEBUG_LEVELING_FEATURE
 
 #if ENABLED(MESH_BED_LEVELING) || ENABLED(AUTO_BED_LEVELING_BILINEAR) || ENABLED(AUTO_BED_LEVELING_UBL)
   // Gradually reduce leveling correction until a set height is reached,
@@ -1000,13 +999,13 @@
 #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 6
+  #define GRID_MAX_POINTS_X 5
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
   #define LEFT_PROBE_BED_POSITION MIN_PROBE_EDGE
-  #define RIGHT_PROBE_BED_POSITION (X_BED_SIZE - MIN_PROBE_EDGE)
-  #define FRONT_PROBE_BED_POSITION (MIN_PROBE_EDGE+15)
+  #define RIGHT_PROBE_BED_POSITION (X_BED_SIZE + X_PROBE_OFFSET_FROM_EXTRUDER)
+  #define FRONT_PROBE_BED_POSITION (MIN_PROBE_EDGE + 12 - Y_PROBE_OFFSET_FROM_EXTRUDER)
   #define BACK_PROBE_BED_POSITION (Y_BED_SIZE - MIN_PROBE_EDGE - 1)
 
   // Probe along the Y axis, advancing X after each column
@@ -1028,7 +1027,7 @@
       #define BILINEAR_SUBDIVISIONS 2
     #endif
 
-  #endif|
+  #endif
 
 #elif ENABLED(AUTO_BED_LEVELING_UBL)
 
@@ -1126,7 +1125,7 @@
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT ((X_BED_SIZE) / 2)    // X point for Z homing when homing all axes (G28).
-  #define Z_SAFE_HOMING_Y_POINT (((Y_BED_SIZE) / 2)+15)    // Y point for Z homing when homing all axes (G28).
+  #define Z_SAFE_HOMING_Y_POINT (((Y_BED_SIZE) / 2) + 12 + Y_PROBE_OFFSET_FROM_EXTRUDER)    // Y point for Z homing when homing all axes (G28).
 #endif
 
 // Homing speeds (mm/m)
@@ -1206,7 +1205,7 @@
 //
 #define EEPROM_SETTINGS // Enable for M500 and M501 commands
 //#define DISABLE_M503    // Saves ~2700 bytes of PROGMEM. Disable for release!
-#define EEPROM_CHITCHAT   // Give feedback on EEPROM commands. Disable to save PROGMEM.
+//#define EEPROM_CHITCHAT   // Give feedback on EEPROM commands. Disable to save PROGMEM.
 
 //
 // Host Keepalive
@@ -1221,7 +1220,7 @@
 //
 // M100 Free Memory Watcher
 //
-#define M100_FREE_MEMORY_WATCHER    // Add M100 (Free Memory Watcher) to debug memory usage
+//#define M100_FREE_MEMORY_WATCHER    // Add M100 (Free Memory Watcher) to debug memory usage
 
 //
 // G20/G21 Inch mode support
@@ -1236,7 +1235,7 @@
 // @section temperature
 
 // Preheat Constants
-#define PREHEAT_1_TEMP_HOTEND   215
+#define PREHEAT_1_TEMP_HOTEND   210
 #define PREHEAT_1_TEMP_BED      60
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
@@ -1302,7 +1301,7 @@
  * Attention: EXPERIMENTAL. G-code arguments may change.
  *
  */
-#define NOZZLE_CLEAN_FEATURE
+//#define NOZZLE_CLEAN_FEATURE
 
 #if ENABLED(NOZZLE_CLEAN_FEATURE)
   // Default number of pattern repetitions
@@ -1355,7 +1354,7 @@
  *
  * View the current statistics with M78.
  */
-#define PRINTCOUNTER
+//#define PRINTCOUNTER
 
 //=============================================================================
 //============================= LCD and SD support ============================
@@ -1638,6 +1637,9 @@
 // http://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
 #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+  #define ST7920_DELAY_1 DELAY_NS(0)
+  #define ST7920_DELAY_2 DELAY_NS(200)
+  #define ST7920_DELAY_3 DELAY_NS(0)
 
 //
 // ReprapWorld Graphical LCD
