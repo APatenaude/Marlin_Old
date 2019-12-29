@@ -328,9 +328,9 @@
 //#define MAX_REDUNDANT_TEMP_SENSOR_DIFF 10
 
 // Extruder temperature must be close to target for this long before M109 returns success
-#define TEMP_RESIDENCY_TIME 6  // (seconds)
-#define TEMP_HYSTERESIS 4       // (degC) range of +/- temperatures considered "close" to the target one
-#define TEMP_WINDOW     3       // (degC) Window around target to start the residency timer x degC early.
+#define TEMP_RESIDENCY_TIME 3  // (seconds)
+#define TEMP_HYSTERESIS 5       // (degC) range of +/- temperatures considered "close" to the target one
+#define TEMP_WINDOW     5       // (degC) Window around target to start the residency timer x degC early.
 
 // Bed temperature must be close to target for this long before M190 returns success
 #define TEMP_BED_RESIDENCY_TIME 6  // (seconds)
@@ -374,12 +374,12 @@
   //#define SLOW_PWM_HEATERS // PWM with very low frequency (roughly 0.125Hz=8s) and minimum state time of approximately 1s useful for heaters driven by a relay
   //#define PID_PARAMS_PER_HOTEND // Uses separate PID parameters for each extruder (useful for mismatched extruders)
                                   // Set/get with gcode: M301 E[extruder number, 0-2]
-  #define PID_FUNCTIONAL_RANGE 20 // If the temperature difference between the target temperature and the actual temperature
+  #define PID_FUNCTIONAL_RANGE 10 // If the temperature difference between the target temperature and the actual temperature
                                   // is more than PID_FUNCTIONAL_RANGE then the PID will be shut off and the heater will be set to min/max.
 
-  #define DEFAULT_Kp 28
-  #define DEFAULT_Ki 0.60
-  #define DEFAULT_Kd 700
+  #define DEFAULT_Kp 26.19
+  #define DEFAULT_Ki 4.63
+  #define DEFAULT_Kd 37.01
 #endif // PIDTEMP
 
 //===========================================================================
@@ -399,7 +399,7 @@
  * heater. If your configuration is significantly different than this and you don't understand
  * the issues involved, don't use bed PID until someone else verifies that your hardware works.
  */
-#define PIDTEMPBED
+//#define PIDTEMPBED
 
 //#define BED_LIMIT_SWITCHING
 
@@ -593,7 +593,7 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 500, 500, 25, 20 }
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 20, 25 }
 
 /**
  * Default Max Acceleration (change/s) change = mm/s
@@ -601,7 +601,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 50, 5000 }
+#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 100, 5000 }
 
 /**
  * Default Acceleration (change/s) change = mm/s
@@ -611,9 +611,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          600    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves
 #define DEFAULT_RETRACT_ACCELERATION  600    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   750    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   700    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk (mm/s)
@@ -1463,7 +1463,7 @@
 //
 //  Set this option if CLOCKWISE causes values to DECREASE
 //
-#define REVERSE_ENCODER_DIRECTION
+//#define REVERSE_ENCODER_DIRECTION
 
 //
 // This option reverses the encoder direction for navigating LCD menus.
